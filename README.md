@@ -1,20 +1,20 @@
-# CryptoDinero
+# SafeCoin
 
-CryptoDinero is a simple blockchain, cryptocurrency, wallet implementation.
+SafeCoin is a simple blockchain, cryptocurrency, wallet implementation.
 NOTE: This project is in the Beta phase and as of right now, it's still in its testing phase.
 
 ## Requirements:
 If you are starting a new project make sure you have some dependences and add these 
 libraries to the project or classpath:
-bcprov-ext-jdk15on-159.jar
-beansbinding-1.2.1.jar
-gson-2.6.2.jar
-PlaceHolder.jar
+##### bcprov-ext-jdk15on-159.jar
+##### beansbinding-1.2.1.jar
+##### gson-2.6.2.jar
+##### PlaceHolder.jar
 
 ###### If this is a continuing project you can run the following files:
 Main.java - simulates two people with wallets to send coins to one another. This also runs a local P2P.
 LoginPage.java - will be the start of the application allowing a user to log into their wallet and create an acc
-CDClientUI.java - the GUI of CryptoDinero's wallet
+CDClientUI.java - the GUI of SafeCoin's wallet
 
 ###### Directions to run
 (unorthodox method, but oh well)
