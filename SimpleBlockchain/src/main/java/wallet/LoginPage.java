@@ -13,6 +13,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader; 
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.Base64;
 
 /**
  *
@@ -23,6 +27,7 @@ public class LoginPage extends javax.swing.JFrame {
     /**
      * Creates new form LoginPage
      */
+    public static String ipAddress;
     public LoginPage() {
         initComponents();
     }
@@ -78,33 +83,32 @@ public class LoginPage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
-                    .addGroup(layout.createSequentialGroup()
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(149, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(180, Short.MAX_VALUE)
                 .addComponent(LoginButton)
                 .addGap(163, 163, 163))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(151, Short.MAX_VALUE)
+                .addGap(151, 151, 151)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LoginButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
@@ -122,12 +126,29 @@ public class LoginPage extends javax.swing.JFrame {
             BufferedReader br = new BufferedReader(new FileReader("Account.txt"));
             txt = br.readLine();
             
-                    if(String.valueOf(jTextField1.getText()).equals(txt) && String.valueOf(jPasswordField1.getPassword()).equals(txt) ) 
+            String[] tokens = txt.split(" ");
+            byte[] decodeString = Base64.getDecoder().decode(tokens[1]);
+            String decodeStr = new String(decodeString);
+            
+                    if(String.valueOf(jTextField1.getText()).equals(tokens[0]) && String.valueOf(jPasswordField1.getPassword()).equals(decodeStr) ) 
                     {
-                        CDClientUI UI = new CDClientUI();
-                        UI.setVisible(true);
-                        setVisible(false);
-                        dispose();
+                        JFrame parent = new JFrame();
+                        ipAddress = JOptionPane.showInputDialog(parent, "Enter in IP address");
+                        //CDClientUI UI = new CDClientUI();
+                        try {
+                    
+                            CDClientUI.main(new String[0]);
+//                          UI.setVisible(true);
+//                          setVisible(false);
+//                          dispose();
+                        } catch (NoSuchAlgorithmException ex) {
+                            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (InvalidKeySpecException ex) {
+                            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (NoSuchProviderException ex) {
+                            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                
                     }
                     else
                     { 

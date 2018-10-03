@@ -12,6 +12,7 @@ import java.security.Security;
 import java.security.spec.InvalidKeySpecException;
 import java.util.*;
 
+import wallet.LoginPage;
 import com.dottorsoft.SimpleBlockChain.core.Block;
 import com.dottorsoft.SimpleBlockChain.core.Transaction;
 import com.dottorsoft.SimpleBlockChain.core.TransactionOutput;
@@ -22,23 +23,28 @@ import com.dottorsoft.SimpleBlockChain.util.Parameters;
 import com.dottorsoft.SimpleBlockChain.util.StringUtil;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author William
+ * @author William (edited by Dallas)
  */
 public class CDClientUI extends javax.swing.JFrame {
     PlaceHolder holder;
+    //public static String ipAddress;
     //public static HashMap<String,TransactionOutput> UTXOs = new HashMap<String,TransactionOutput>();
     public static float minimumTransaction = 0.1f;
     public static Wallet walletA;
     //public static Wallet walletB = new Wallet();
     public static Transaction genesisTransaction;
-    public static ExecuteCommands server = new ExecuteCommands(8888);
-    public static ExecuteCommands client = new ExecuteCommands(8889);
+    public static ExecuteCommands server;// = new ExecuteCommands(8888);
+    public static ExecuteCommands client;// = new ExecuteCommands(8889);
     /**
      * Creates new form CDClientUI
      */
@@ -206,15 +212,16 @@ public class CDClientUI extends javax.swing.JFrame {
         overviewPanelLayout.setHorizontalGroup(
             overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(overviewPanelLayout.createSequentialGroup()
-                .addGap(297, 297, 297)
-                .addComponent(updateBtn)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(322, Short.MAX_VALUE))
-            .addGroup(overviewPanelLayout.createSequentialGroup()
-                .addGap(202, 202, 202)
-                .addComponent(walletPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 244, Short.MAX_VALUE))
+            .addGroup(overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(overviewPanelLayout.createSequentialGroup()
+                        .addGap(294, 294, 294)
+                        .addComponent(updateBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2))
+                    .addGroup(overviewPanelLayout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addComponent(walletPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         overviewPanelLayout.setVerticalGroup(
             overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,7 +298,7 @@ public class CDClientUI extends javax.swing.JFrame {
                         .addGroup(sendPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(sendCoinBtn)
                             .addComponent(amountSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
         sendPanelLayout.setVerticalGroup(
             sendPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,7 +356,7 @@ public class CDClientUI extends javax.swing.JFrame {
                     .addGroup(receivePanelLayout.createSequentialGroup()
                         .addGap(343, 343, 343)
                         .addComponent(jButton1)))
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addContainerGap(232, Short.MAX_VALUE))
         );
         receivePanelLayout.setVerticalGroup(
             receivePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -552,7 +559,7 @@ public class CDClientUI extends javax.swing.JFrame {
 //                //System.out.println(p.getHash());
 //                System.out.println(tempBlock);
 //        }
-        server.connect("137.198.12.191", 8888);
+        server.connect(LoginPage.ipAddress, 8888);
     }//GEN-LAST:event_sendCoinBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
@@ -568,16 +575,18 @@ public class CDClientUI extends javax.swing.JFrame {
             System.out.println(StringUtil.getJson(Parameters.UTXOs));
         }
         balanceCoins.setText(String.valueOf(walletA.getBalance()));
-                LinkedHashMap<String, Block> obj = gson.fromJson(server.getBlockChain(), new TypeToken<LinkedHashMap<String, Block>>() {}.getType());
-		if(obj.size() > Parameters.UTXOs.size())
-                {
-                    Parameters.blockchain = obj;
-                }
-                for (Map.Entry<String, Block> entry : Parameters.blockchain.entrySet()) {
-                    System.out.println(entry.getValue());
-                }
-                
-       server.connect("137.198.12.191", 8888);
+        //transactionCount
+//                LinkedHashMap<String, Block> obj = gson.fromJson(server.getBlockChain(), new TypeToken<LinkedHashMap<String, Block>>() {}.getType());
+//      if(obj.size() > Parameters.UTXOs.size())
+//                {
+//                    Parameters.blockchain = obj;
+//                    //Parameters.blockchain = new LinkedHashMap<String, Block>();
+//                }
+//                for (Map.Entry<String, Block> entry : Parameters.blockchain.entrySet()) {
+//                    System.out.println(entry.getValue());
+//                }
+
+       server.connect(LoginPage.ipAddress, 8888);
         /*
         System.out.println("client "+Parameters.UTXOs);
         System.out.println("client " + obj);
@@ -591,8 +600,11 @@ public class CDClientUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, ("Your Public Key is: \n" + walletA.getPublicKey()));
+        JOptionPane.showMessageDialog(null, ("Your Public Key is: \nIt has been copied to your clipboard.\n" + walletA.getPublicKey()));
         System.out.println(walletA.getPublicKey());
+        StringSelection stringSelection = new StringSelection (walletA.getPublicKey());
+        Clipboard clpbrd = Toolkit.getDefaultToolkit ().getSystemClipboard ();
+        clpbrd.setContents (stringSelection, null);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -643,6 +655,7 @@ public class CDClientUI extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CDClientUI().setVisible(true);
@@ -740,12 +753,16 @@ public class CDClientUI extends javax.swing.JFrame {
 //		ExecuteCommands client = new ExecuteCommands(8889);
 		//ExecuteCommands client2 = new ExecuteCommands(8890);
                 */
-		client.connect("137.198.12.191", 8888);
+		      server = new ExecuteCommands(8888);
+              client = new ExecuteCommands(8889);
+
+
+        client.connect(LoginPage.ipAddress, 8888);
 		//client2.connect("127.0.0.1", 8888);
 		System.out.println("RECEIVED: "+client.register());
 		//client2.register();
 		//server.connect("127.0.0.1", 8890);
-		server.connect("137.198.12.191", 8888);
+		server.connect(LoginPage.ipAddress, 8888);
                 
                /*
                 Gson gson = new Gson();

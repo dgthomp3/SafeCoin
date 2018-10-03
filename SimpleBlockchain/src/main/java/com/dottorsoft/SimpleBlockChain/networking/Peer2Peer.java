@@ -26,15 +26,17 @@ public class Peer2Peer {
 	public Peer2Peer(int port){
 		this.port = port;
 		isRunning = true;
-		peerThread = new Thread(new Runnable() {
-			   public void run() {
-			       try {
-					listen();
-				} catch (IOException e) {
-					e.getStackTrace();
-				}
-			   }
-			});
+		peerThread = new Thread(new Runnable() 
+			{
+				public void run() {
+			       	try {
+						listen();
+					} 
+					catch (IOException e) {
+						e.getStackTrace();
+					}
+			   	}
+		});
 		
 		peerThread.start();
 	}

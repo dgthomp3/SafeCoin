@@ -11,7 +11,6 @@ public class Parameters {
 	public static int difficulty = 2;
 	
 	public static LinkedHashMap<String,Block> blockchain = new LinkedHashMap<String, Block>();
-        
-        public static HashMap<String,TransactionOutput> UTXOs = new HashMap<String,TransactionOutput>();
-
+    public static String pubKey = null;
+    public static HashMap<String,TransactionOutput> UTXOs = new HashMap<String,TransactionOutput>();
 }
