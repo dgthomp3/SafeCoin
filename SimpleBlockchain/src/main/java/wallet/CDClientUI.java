@@ -18,7 +18,6 @@ import com.dottorsoft.SimpleBlockChain.core.Transaction;
 import com.dottorsoft.SimpleBlockChain.core.TransactionOutput;
 import com.dottorsoft.SimpleBlockChain.core.Wallet;
 import com.dottorsoft.SimpleBlockChain.networking.ExecuteCommands;
-import com.dottorsoft.SimpleBlockChain.util.ChainUtils;
 import com.dottorsoft.SimpleBlockChain.util.Parameters;
 import com.dottorsoft.SimpleBlockChain.util.StringUtil;
 import com.google.gson.*;
@@ -28,7 +27,6 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -672,7 +670,7 @@ public class CDClientUI extends javax.swing.JFrame {
 //              
                 //Print transaction ids
                 TransactionOutput transactionID = new TransactionOutput();
-		/*
+		
 		//create genesis transaction, which sends 100 NoobCoin to walletA: 
 		genesisTransaction = new Transaction(wallet.getPublicKey(), walletA.getPublicKey(), 100f, null);
 		genesisTransaction.generateSignature(wallet.getPrivateKey());	 //manually sign the genesis transaction	
