@@ -4,8 +4,11 @@ SafeCoin is a simple blockchain, cryptocurrency, wallet implementation.
 NOTE: This project is in the Beta phase and as of right now, it's still in its testing phase.
 
 ## Requirements:
-If you are starting a new project make sure you have some dependences and add these 
-libraries to the project or classpath:
+Download the NetBeans IDE 8.2 and Java SE Dev Kit 8
+	- https://netbeans.org/
+	- https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
+Download the project and ensure that these dependecies are in the folder: (If not search them and download off the internet)
 ##### bcprov-ext-jdk15on-159.jar
 ##### beansbinding-1.2.1.jar
 ##### gson-2.6.2.jar
