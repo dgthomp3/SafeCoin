@@ -20,8 +20,8 @@ CDClientUI.java - the GUI of SafeCoin's wallet
 (unorthodox method, but oh well)
 (Preferably to run on Netbeans)
 1. Before running, on Computer 1, open CDClientUI.java and find the main method and change the server and client IP's to the other IP 
-of the other computer. Do the same for Computer 2. (Lines 743, 748, 555, 580)
-2. On your Computer 1, remove the multi line comment on line 662. This is important to have the genesis block give your
+of the other computer. Do the same for Computer 2. (Lines 743, 748, 562, 580)
+2. On your Computer 1, remove the multi line comment on line 675. This is important to have the genesis block give your
 wallet some coins.
 3. On the second computer keep everything as is.
 4. Run LoginPage.java and you can go and create an account then you will be able to login.
@@ -33,3 +33,5 @@ wallet some coins.
 ###### Editors notes
 This application sometimes like to drop connection, not sure why.
 Checking the balance on Computer 2 doesn't seem to update the balance but it ends up in our transaction list.
+
+"137.198.151.117"

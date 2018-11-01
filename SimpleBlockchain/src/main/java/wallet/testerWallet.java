@@ -46,25 +46,78 @@ public class testerWallet extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popupMenu1 = new java.awt.PopupMenu();
+        popupMenu2 = new java.awt.PopupMenu();
+        panel1 = new java.awt.Panel();
+        panel2 = new java.awt.Panel();
+        jColorChooser1 = new javax.swing.JColorChooser();
         enterKey = new javax.swing.JTextField();
         publicKeyLabel = new javax.swing.JLabel();
         getPublicKeyBtn = new javax.swing.JButton();
         sendCoinBtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+
+        popupMenu1.setLabel("popupMenu1");
+
+        popupMenu2.setLabel("popupMenu2");
+
+        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
+        panel1.setLayout(panel1Layout);
+        panel1Layout.setHorizontalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        panel1Layout.setVerticalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
+        panel2.setLayout(panel2Layout);
+        panel2Layout.setHorizontalGroup(
+            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        panel2Layout.setVerticalGroup(
+            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jColorChooser1.setBackground(new java.awt.Color(0, 0, 0));
+        jColorChooser1.setBorder(new javax.swing.border.MatteBorder(new javax.swing.ImageIcon(getClass().getResource("/wallet/SafeCoin Logo.png")))); // NOI18N
+        jColorChooser1.setColor(new java.awt.Color(255, 204, 0));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 0));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         enterKey.setText("Enter in a public key");
 
         publicKeyLabel.setText("Your Public Key");
 
+        getPublicKeyBtn.setBackground(new java.awt.Color(255, 153, 0));
         getPublicKeyBtn.setText("Get Public Key");
+        getPublicKeyBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getPublicKeyBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 getPublicKeyBtnActionPerformed(evt);
             }
         });
 
+        sendCoinBtn.setBackground(new java.awt.Color(255, 153, 0));
         sendCoinBtn.setText("Send Coins");
+        sendCoinBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,16 +132,21 @@ public class testerWallet extends javax.swing.JFrame {
                         .addGap(157, 157, 157)
                         .addComponent(publicKeyLabel))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(getPublicKeyBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(sendCoinBtn)))
-                .addContainerGap(111, Short.MAX_VALUE))
+                        .addGap(147, 147, 147)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(117, Short.MAX_VALUE)
+                .addComponent(getPublicKeyBtn)
+                .addGap(33, 33, 33)
+                .addComponent(sendCoinBtn)
+                .addGap(120, 120, 120))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(105, 105, 105)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addComponent(enterKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(publicKeyLabel)
@@ -96,7 +154,7 @@ public class testerWallet extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(getPublicKeyBtn)
                     .addComponent(sendCoinBtn))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -145,6 +203,12 @@ public class testerWallet extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField enterKey;
     private javax.swing.JButton getPublicKeyBtn;
+    private javax.swing.JColorChooser jColorChooser1;
+    private javax.swing.JPanel jPanel1;
+    private java.awt.Panel panel1;
+    private java.awt.Panel panel2;
+    private java.awt.PopupMenu popupMenu1;
+    private java.awt.PopupMenu popupMenu2;
     private javax.swing.JLabel publicKeyLabel;
     private javax.swing.JButton sendCoinBtn;
     // End of variables declaration//GEN-END:variables

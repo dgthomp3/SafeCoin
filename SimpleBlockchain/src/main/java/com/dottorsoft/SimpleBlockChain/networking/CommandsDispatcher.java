@@ -5,7 +5,7 @@ import com.dottorsoft.SimpleBlockChain.util.Commands;
 import com.dottorsoft.SimpleBlockChain.util.Parameters;
 import com.dottorsoft.SimpleBlockChain.util.StringUtil;
 import com.dottorsoft.SimpleBlockChain.core.Wallet;
-import wallet.CDCClientUI;
+import wallet.CDClientUI;
 
 public class CommandsDispatcher {
 	

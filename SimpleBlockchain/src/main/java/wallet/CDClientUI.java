@@ -12,13 +12,11 @@ import java.security.Security;
 import java.security.spec.InvalidKeySpecException;
 import java.util.*;
 
-import wallet.LoginPage;
 import com.dottorsoft.SimpleBlockChain.core.Block;
 import com.dottorsoft.SimpleBlockChain.core.Transaction;
 import com.dottorsoft.SimpleBlockChain.core.TransactionOutput;
 import com.dottorsoft.SimpleBlockChain.core.Wallet;
 import com.dottorsoft.SimpleBlockChain.networking.ExecuteCommands;
-import com.dottorsoft.SimpleBlockChain.util.ChainUtils;
 import com.dottorsoft.SimpleBlockChain.util.Parameters;
 import com.dottorsoft.SimpleBlockChain.util.StringUtil;
 import com.google.gson.*;
@@ -28,7 +26,6 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -63,6 +60,7 @@ public class CDClientUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFrame1 = new javax.swing.JFrame();
         overviewBtn = new javax.swing.JButton();
         sendBtn = new javax.swing.JButton();
         receiveBtn = new javax.swing.JButton();
@@ -100,35 +98,54 @@ public class CDClientUI extends javax.swing.JFrame {
         lab = new javax.swing.JTextArea();
         jButton3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("CryptoDinero");
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SafeCoin");
+
+        overviewBtn.setBackground(new java.awt.Color(255, 153, 0));
         overviewBtn.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         overviewBtn.setText("Overview");
+        overviewBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         overviewBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 overviewBtnActionPerformed(evt);
             }
         });
 
+        sendBtn.setBackground(new java.awt.Color(255, 153, 0));
         sendBtn.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         sendBtn.setText("Send Coins");
+        sendBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         sendBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendBtnActionPerformed(evt);
             }
         });
 
+        receiveBtn.setBackground(new java.awt.Color(255, 153, 0));
         receiveBtn.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         receiveBtn.setText("Receive Coins");
+        receiveBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         receiveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 receiveBtnActionPerformed(evt);
             }
         });
 
+        transactionBtn.setBackground(new java.awt.Color(255, 153, 0));
         transactionBtn.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         transactionBtn.setText("Transactions");
+        transactionBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         transactionBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 transactionBtnActionPerformed(evt);
@@ -136,6 +153,8 @@ public class CDClientUI extends javax.swing.JFrame {
         });
 
         mainPanel.setLayout(new java.awt.CardLayout());
+
+        overviewPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         walletPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Wallet", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         walletPanel.setName("Wallet"); // NOI18N
@@ -150,10 +169,10 @@ public class CDClientUI extends javax.swing.JFrame {
         jLabel1.setText("Number of Transactions:");
 
         balanceCoins.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        balanceCoins.setText("00.000 CD");
+        balanceCoins.setText("00.000 SC");
 
         unconfirmedCoins.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        unconfirmedCoins.setText("00.000 CD");
+        unconfirmedCoins.setText("00.000 SC");
 
         transactionCount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         transactionCount.setText("0");
@@ -193,14 +212,18 @@ public class CDClientUI extends javax.swing.JFrame {
                 .addContainerGap(56, Short.MAX_VALUE))
         );
 
+        updateBtn.setBackground(new java.awt.Color(255, 153, 0));
         updateBtn.setText("Update");
+        updateBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateBtnActionPerformed(evt);
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 153, 0));
         jButton2.setText("Your PK");
+        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -212,21 +235,21 @@ public class CDClientUI extends javax.swing.JFrame {
         overviewPanelLayout.setHorizontalGroup(
             overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(overviewPanelLayout.createSequentialGroup()
-            .addGroup(overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(overviewPanelLayout.createSequentialGroup()
                         .addGap(294, 294, 294)
                         .addComponent(updateBtn)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2))
                     .addGroup(overviewPanelLayout.createSequentialGroup()
-                        .addGap(202, 202, 202)
+                        .addGap(193, 193, 193)
                         .addComponent(walletPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addContainerGap(254, Short.MAX_VALUE))
         );
         overviewPanelLayout.setVerticalGroup(
             overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, overviewPanelLayout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addComponent(walletPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(overviewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -298,7 +321,7 @@ public class CDClientUI extends javax.swing.JFrame {
                         .addGroup(sendPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(sendCoinBtn)
                             .addComponent(amountSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         sendPanelLayout.setVerticalGroup(
             sendPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,7 +379,7 @@ public class CDClientUI extends javax.swing.JFrame {
                     .addGroup(receivePanelLayout.createSequentialGroup()
                         .addGap(343, 343, 343)
                         .addComponent(jButton1)))
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
         receivePanelLayout.setVerticalGroup(
             receivePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,25 +462,25 @@ public class CDClientUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(overviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(102, 102, 102)
+                        .addComponent(overviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(sendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(receiveBtn)
+                        .addComponent(receiveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(transactionBtn)))
+                        .addComponent(transactionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(overviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sendBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(receiveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(transactionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(transactionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(overviewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -550,7 +573,7 @@ public class CDClientUI extends javax.swing.JFrame {
         /////////////////////////////////////////////////////////////server.getTransaction()
 //        temp = Parameters.blockchain;
 //        set = temp.entrySet();
-//        iterator = set.iterator();
+//        iterator = set.iterator(); 
 //        while(iterator.hasNext())
 //        {
 //                Map.Entry item = (Map.Entry) iterator.next();
@@ -619,7 +642,7 @@ public class CDClientUI extends javax.swing.JFrame {
            {      
                
             id = id + "ID: " + entry.getValue().id + "\n";
-            id = id + "Amount: " + entry.getValue().value+ " CD" + "\n\n";
+            id = id + "Amount: " + entry.getValue().value+ " SC" + "\n\n";
            } 
         }
         lab.setText(id);
@@ -808,6 +831,7 @@ public class CDClientUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
