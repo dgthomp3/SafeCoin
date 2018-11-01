@@ -4,8 +4,7 @@ import com.dottorsoft.SimpleBlockChain.util.ChainUtils;
 import com.dottorsoft.SimpleBlockChain.util.Commands;
 import com.dottorsoft.SimpleBlockChain.util.Parameters;
 import com.dottorsoft.SimpleBlockChain.util.StringUtil;
-import com.dottorsoft.SimpleBlockChain.core.Wallet;
-import wallet.CDCClientUI;
+import wallet.CDClientUI;
 
 public class CommandsDispatcher {
 	
@@ -42,7 +41,6 @@ public class CommandsDispatcher {
                         System.out.println(Parameters.pubKey);
                     }
                         
-                        ;
                 }     
 		
 		return Commands.UNKNOWN_COMMAND.getCommand();
