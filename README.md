@@ -34,4 +34,3 @@ wallet some coins.
 This application sometimes like to drop connection, not sure why.
 Checking the balance on Computer 2 doesn't seem to update the balance but it ends up in our transaction list.
 
-"137.198.151.117"
