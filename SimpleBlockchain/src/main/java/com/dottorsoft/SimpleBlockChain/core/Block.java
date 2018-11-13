@@ -116,7 +116,7 @@ public class Block {
 
 	public long getTimeStamp() {
 		return timeStamp;
-	}
+        }
 
 	public void setTimeStamp(long timeStamp) {
 		this.timeStamp = timeStamp;

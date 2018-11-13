@@ -131,7 +131,7 @@ public class Peer2Peer {
 	}
 
 	public void setPeers(LinkedList<Peer> peers) {
-		this.peers = peers;
+		Peer2Peer.peers = peers;
 	}
 
 	public int getPort() {
