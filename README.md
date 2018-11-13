@@ -22,7 +22,7 @@ CDClientUI.java - the GUI of SafeCoin's wallet
 ###### Directions to run
 (Run on Netbeans)
 1. Open Netbeans on both Computers (Computer A and Computer B)
-2. On your Computer A, remove the multi line comment on line 662. This is important to have the genesis block give your
+2. On your Computer A, remove the multi line comment on line 689 (CDClientUI.java). This is important to have the genesis block give your
 wallet some coins.
 3. On Computer B keep everything as is.
 4. Press run project on both computers.
