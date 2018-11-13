@@ -8,19 +8,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.net.*;
 import java.io.*;
-import java.util.*;
 import java.net.InetAddress;
 
 import org.bouncycastle.jcajce.provider.asymmetric.ec.BCECPrivateKey;
 
-import com.dottorsoft.SimpleBlockChain.Main;
 import com.dottorsoft.SimpleBlockChain.util.StringUtil;
 import com.dottorsoft.SimpleBlockChain.networking.Peer2Peer;
 import com.dottorsoft.SimpleBlockChain.networking.Peer;
 import com.dottorsoft.SimpleBlockChain.util.Parameters;
 import java.util.LinkedList;
 
-public class Wallet {
+public final class Wallet {
 	
 	private BCECPrivateKey privateKey;
 	private String publicKey;
@@ -43,9 +41,13 @@ public class Wallet {
 	        setPrivateKey((BCECPrivateKey) keyPair.getPrivate());
 	        setPublicKey(StringUtil.getStringFromKey(keyPair.getPublic()));
 	        
-		}catch(Exception e) {
+		}catch(InvalidAlgorithmParameterException e) {
 			throw new RuntimeException(e);
-		}
+		} catch (NoSuchAlgorithmException e) {
+                    throw new RuntimeException(e);
+            } catch (NoSuchProviderException e) {
+                throw new RuntimeException(e);
+            }
 	}
 	
 	public float getBalance() {
