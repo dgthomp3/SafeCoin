@@ -695,7 +695,7 @@ public class CDClientUI extends javax.swing.JFrame {
 //              
                 //Print transaction ids
                 TransactionOutput transactionID = new TransactionOutput();
-	
+
 		//create genesis transaction, which sends 100 NoobCoin to walletA: 
 		genesisTransaction = new Transaction(wallet.getPublicKey(), walletA.getPublicKey(), 100f, null);
 		genesisTransaction.generateSignature(wallet.getPrivateKey());	 //manually sign the genesis transaction	

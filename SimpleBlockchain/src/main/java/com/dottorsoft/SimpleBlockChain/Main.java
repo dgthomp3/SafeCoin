@@ -10,11 +10,9 @@ import com.dottorsoft.SimpleBlockChain.core.Block;
 import com.dottorsoft.SimpleBlockChain.core.Transaction;
 import com.dottorsoft.SimpleBlockChain.core.TransactionOutput;
 import com.dottorsoft.SimpleBlockChain.core.Wallet;
-import com.dottorsoft.SimpleBlockChain.networking.ExecuteCommands;
 import com.dottorsoft.SimpleBlockChain.util.ChainUtils;
 import com.dottorsoft.SimpleBlockChain.util.Parameters;
 import com.dottorsoft.SimpleBlockChain.util.StringUtil;
-import java.util.Map;
 
 public class Main {
 	
@@ -113,6 +111,7 @@ public class Main {
 		//Block block4 = new Block();
 		//ArrayList<Block> c = block4.fromJsonToChain(chain);
 		//System.out.println("***************");
+                
 		//System.out.println(StringUtil.getJson(c));
 	}
 	
