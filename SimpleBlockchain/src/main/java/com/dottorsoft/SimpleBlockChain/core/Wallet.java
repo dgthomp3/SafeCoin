@@ -30,38 +30,45 @@ public final class Wallet {
 	}
 		
 	public void generateKeyPair() {
-		try {
-			KeyPairGenerator keyGen = KeyPairGenerator.getInstance("ECDSA","BC");
-			SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
-			ECGenParameterSpec ecSpec = new ECGenParameterSpec("prime192v1");
-			// Initialize the key generator and generate a KeyPair
-			keyGen.initialize(ecSpec, random); //256 
-	        KeyPair keyPair = keyGen.generateKeyPair();
-	        // Set the public and private keys from the keyPair
-	        setPrivateKey((BCECPrivateKey) keyPair.getPrivate());
-	        setPublicKey(StringUtil.getStringFromKey(keyPair.getPublic()));
-	        
-		}catch(InvalidAlgorithmParameterException e) {
-			throw new RuntimeException(e);
-		} catch (NoSuchAlgorithmException e) {
-                    throw new RuntimeException(e);
+            try {
+		KeyPairGenerator keyGen 
+                               = KeyPairGenerator.getInstance("ECDSA","BC");
+		SecureRandom random 
+                               = SecureRandom.getInstance("SHA1PRNG");
+		ECGenParameterSpec ecSpec 
+                               = new ECGenParameterSpec("prime192v1");
+                        
+		// Initialize the key generator and generate a KeyPair
+		keyGen.initialize(ecSpec, random); //256 
+                KeyPair keyPair = keyGen.generateKeyPair();
+                        
+                // Set the public and private keys from the keyPair
+                setPrivateKey((BCECPrivateKey) keyPair.getPrivate());
+                setPublicKey(StringUtil.getStringFromKey(keyPair.getPublic()));
+            } catch(InvalidAlgorithmParameterException e) {
+		throw new RuntimeException(e);
+            } catch (NoSuchAlgorithmException e) {
+                throw new RuntimeException(e);
             } catch (NoSuchProviderException e) {
                 throw new RuntimeException(e);
             }
 	}
 	
 	public float getBalance() {
-		float total = 0;
-		TransactionOutput UTXO;
-        for (Map.Entry<String, TransactionOutput> item: Parameters.UTXOs.entrySet()){
-            System.out.println("hi my pub key is " + publicKey);
+            float total = 0;
+            TransactionOutput UTXO;
+            
+            for (Map.Entry<String, TransactionOutput> item: Parameters.UTXOs.entrySet()){
+                System.out.println("hi my pub key is " + publicKey);
         	UTXO = item.getValue();
-            if(UTXO.isMine(publicKey)) { //if output belongs to me ( if coins belong to me )
-               	UTXOs.put(UTXO.id,UTXO); //add it to our list of unspent transactions.
-            	total += UTXO.value ; 
+                
+                if(UTXO.isMine(publicKey)) { //if output belongs to me ( if coins belong to me )
+                    UTXOs.put(UTXO.id,UTXO); //add it to our list of unspent transactions.
+                    total += UTXO.value ; 
+                }
             }
-        }  
-		return total;
+            
+            return total;
 	}
 	
 	public Transaction sendFunds(String _recipient,float value ) throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -123,7 +130,7 @@ public final class Wallet {
                 // reads system IPAddress
                 systemipaddress = sc.readLine().trim();
             }
-            catch (Exception e)
+            catch (IOException e)
             {
                 systemipaddress = "Cannot Execute Properly";
             }
@@ -131,7 +138,7 @@ public final class Wallet {
             LinkedList<Peer> p = Peer2Peer.peers;    
             return "b";
 
-            }
+        }
 	
 }
 

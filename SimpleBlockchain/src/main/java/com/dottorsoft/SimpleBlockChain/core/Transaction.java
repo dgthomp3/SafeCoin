@@ -14,15 +14,19 @@ import com.dottorsoft.SimpleBlockChain.util.StringUtil;
 
 public class Transaction {
 	
-	private String transactionId; //Contains a hash of transaction*
-	private String sender; //Senders address/public key.
-	private String reciepient; //Recipients address/public key.
-	private float value; //Contains the amount we wish to send to the recipient.
-	private byte[] signature; //This is to prevent anybody else from spending funds in our wallet.
+    // !!! change data members of transaction class from private to public
+	public String transactionId; //Contains a hash of transaction*
+	public String sender; //Senders address/public key.
+        // !!! recipient is spelled wrong!!
+	public String reciepient; //Recipients address/public key.
+	public float value; //Contains the amount we wish to send to the recipient.
+	public byte[] signature; //This is to prevent anybody else from spending funds in our wallet.
 	
-	private ArrayList<TransactionInput> inputs = new ArrayList<TransactionInput>();
-	private ArrayList<TransactionOutput> outputs = new ArrayList<TransactionOutput>();
+        // !!! change inputs and outputs from private to public
+	public ArrayList<TransactionInput> inputs = new ArrayList<TransactionInput>();
+	public ArrayList<TransactionOutput> outputs = new ArrayList<TransactionOutput>();
 	
+        // !! sequence is a private data member
 	private static int sequence = 0; //A rough count of how many transactions have been generated 
 	
 	public Transaction(){}
@@ -52,7 +56,7 @@ public class Transaction {
 			System.out.println("Transaction Inputs to small: " + getInputsValue());
 			return false;
 		}
-		
+	
 		//Generate transaction outputs:
 		float leftOver = getInputsValue() - value; //get value of inputs then the left over change:
 		transactionId = calulateHash();
