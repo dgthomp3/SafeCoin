@@ -4,7 +4,6 @@ import com.dottorsoft.SimpleBlockChain.util.ChainUtils;
 import com.dottorsoft.SimpleBlockChain.util.Commands;
 import com.dottorsoft.SimpleBlockChain.util.Parameters;
 import com.dottorsoft.SimpleBlockChain.util.StringUtil;
-import com.dottorsoft.SimpleBlockChain.core.Wallet;
 
 import wallet.CDClientUI;
 

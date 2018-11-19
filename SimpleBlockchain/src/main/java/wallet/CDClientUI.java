@@ -31,7 +31,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author William (edited by Dallas)
+ * @author William (edited by SafeCoin)
  */
 public class CDClientUI extends javax.swing.JFrame {
     PlaceHolder holder;
@@ -48,7 +48,7 @@ public class CDClientUI extends javax.swing.JFrame {
      */
     public CDClientUI() {
         initComponents();
-        holder = new PlaceHolder(payToTextField, "Enter a CryptoDinero address (e.g. 2EE57059EE6D2AD31EADB385C2282D342971B308AE418)");
+        holder = new PlaceHolder(payToTextField, "Enter a SafeCoin address (e.g. 2EE57059EE6D2AD31EADB385C2282D342971B308AE418)");
         holder = new PlaceHolder(labelTextField, "Enter a label for this address to label the transaction");
     }
 
@@ -654,6 +654,9 @@ public class CDClientUI extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
+     * @throws java.security.NoSuchAlgorithmException
+     * @throws java.security.spec.InvalidKeySpecException
+     * @throws java.security.NoSuchProviderException
      */
     public static void main(String args[]) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchProviderException{
         /* Set the Nimbus look and feel */
@@ -693,7 +696,11 @@ public class CDClientUI extends javax.swing.JFrame {
                 
 		Wallet walletB = new Wallet();		
 		Wallet wallet = new Wallet();
-//              
+                PaperMaker papM = new PaperMaker();
+                
+                papM.qrGenerator(walletA);
+                // papM.qrGenerator(walletB);
+                
                 //Print transaction ids
                 TransactionOutput transactionID = new TransactionOutput();
 
