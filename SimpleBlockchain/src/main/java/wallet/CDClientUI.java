@@ -17,6 +17,7 @@ import com.dottorsoft.SimpleBlockChain.core.Transaction;
 import com.dottorsoft.SimpleBlockChain.core.TransactionOutput;
 import com.dottorsoft.SimpleBlockChain.core.Wallet;
 import com.dottorsoft.SimpleBlockChain.networking.ExecuteCommands;
+import com.dottorsoft.SimpleBlockChain.util.ChainUtils;
 import com.dottorsoft.SimpleBlockChain.util.Parameters;
 import com.dottorsoft.SimpleBlockChain.util.StringUtil;
 import com.google.gson.*;
@@ -696,7 +697,7 @@ public class CDClientUI extends javax.swing.JFrame {
                 //Print transaction ids
                 TransactionOutput transactionID = new TransactionOutput();
 
-		//create genesis transaction, which sends 100 NoobCoin to walletA: 
+		//create genesis transaction, which sends 100 Coins to walletA: 
 		genesisTransaction = new Transaction(wallet.getPublicKey(), walletA.getPublicKey(), 100, null);
 		genesisTransaction.generateSignature(wallet.getPrivateKey());	 //manually sign the genesis transaction	
 		genesisTransaction.setTransactionId("0"); //manually set the transaction id
@@ -726,7 +727,7 @@ public class CDClientUI extends javax.swing.JFrame {
 		
 		Block block3 = new Block(block2.getHash());
 		System.out.println("\nWalletB is Attempting to send funds (20) to WalletA...");
-		block3.addTransaction(walletB.sendFunds( walletA.getPublicKey(), 20));
+		block3.addTransaction(walletB.sendFunds( walletA.getPublicKey(), 20f));
 		System.out.println("\nWalletA's balance is: " + walletA.getBalance());
 		System.out.println("WalletB's balance is: " + walletB.getBalance());
 		addBlock(block3.getHash(),block3);
@@ -749,7 +750,7 @@ public class CDClientUI extends javax.swing.JFrame {
                     
                 }
                 
-                /*
+                
 //                System.out.println("Original Hashes");
 //                System.out.println(genesis.getHash() + "\n" +block1.getHash() + "\n" +block2.getHash() + "\n" +block3.getHash());
                 System.out.println("\n");

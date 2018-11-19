@@ -47,7 +47,7 @@ public class Main {
 		Block genesis = new Block("0");
 		genesis.addTransaction(genesisTransaction);
 		addBlock(genesis.getHash(),genesis);
-		
+		/*
 		//testing
 		Block block1 = new Block(genesis.getHash());
 		System.out.println("\nWalletA's balance is: " + walletA.getBalance());
