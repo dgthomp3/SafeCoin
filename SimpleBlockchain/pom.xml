@@ -57,6 +57,12 @@
 	  <artifactId>core</artifactId>
 	  <version>3.2.1</version>
 	 </dependency>
+	 <dependency>
+	  <groupId>net.sf.jsr107cache</groupId>
+	  <artifactId>jsr107cache</artifactId>
+	  <version>1.0</version>
+	  <type>jar</type>
+	 </dependency>
 	</dependencies>
 	<build>
 		<plugins>
