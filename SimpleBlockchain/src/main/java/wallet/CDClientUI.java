@@ -715,7 +715,7 @@ public class CDClientUI extends javax.swing.JFrame {
 		Block genesis = new Block("0");
 		genesis.addTransaction(genesisTransaction);
 		addBlock(genesis.getHash(),genesis);
-		/*
+		
 		//testing
 		Block block1 = new Block(genesis.getHash());
 		System.out.println("\nWalletA's balance is: " + walletA.getBalance());
@@ -757,7 +757,7 @@ public class CDClientUI extends javax.swing.JFrame {
                     
                 }
                 
-                /*
+                
 //                System.out.println("Original Hashes");
 //                System.out.println(genesis.getHash() + "\n" +block1.getHash() + "\n" +block2.getHash() + "\n" +block3.getHash());
                 System.out.println("\n");
