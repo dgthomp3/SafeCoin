@@ -21,16 +21,28 @@ import com.dottorsoft.SimpleBlockChain.util.Parameters;
 import com.dottorsoft.SimpleBlockChain.util.StringUtil;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author William (edited by Dallas)
+ * @author William (edited by SafeCoin)
  */
 public class CDClientUI extends javax.swing.JFrame {
     PlaceHolder holder;
@@ -47,7 +59,7 @@ public class CDClientUI extends javax.swing.JFrame {
      */
     public CDClientUI() {
         initComponents();
-        holder = new PlaceHolder(payToTextField, "Enter a CryptoDinero address (e.g. 2EE57059EE6D2AD31EADB385C2282D342971B308AE418)");
+        holder = new PlaceHolder(payToTextField, "Enter a SafeCoin address (e.g. 2EE57059EE6D2AD31EADB385C2282D342971B308AE418)");
         holder = new PlaceHolder(labelTextField, "Enter a label for this address to label the transaction");
     }
 
@@ -653,6 +665,9 @@ public class CDClientUI extends javax.swing.JFrame {
 
     /**
      * @param args the command line arguments
+     * @throws java.security.NoSuchAlgorithmException
+     * @throws java.security.spec.InvalidKeySpecException
+     * @throws java.security.NoSuchProviderException
      */
     public static void main(String args[]) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchProviderException{
         /* Set the Nimbus look and feel */
@@ -692,7 +707,8 @@ public class CDClientUI extends javax.swing.JFrame {
                 
 		Wallet walletB = new Wallet();		
 		Wallet wallet = new Wallet();
-//              
+                qrGenerator(walletA);
+                qrGenerator(walletB);
                 //Print transaction ids
                 TransactionOutput transactionID = new TransactionOutput();
 
@@ -823,6 +839,56 @@ public class CDClientUI extends javax.swing.JFrame {
 		newBlock.mineBlock(Parameters.difficulty);
 		Parameters.blockchain.put(current, newBlock);
 	}
+    
+    private static void qrGenerator(Wallet wallet) {
+        // Get Wallet Public Key
+        String pubKey = wallet.getPublicKey();
+        // BCECPrivateKey privKey = wallet.getPrivateKey();
+        
+        String filePath;
+        filePath = "/Users/team1/Desktop/SafeCoin/SimpleBlockchain/src/main/java/wallet/";
+        int size = 250;
+        String fileType = "png";
+        File myFile = new File(filePath + "PaperWallet");
+        
+        try {
+			
+            Map<EncodeHintType, Object> hintMap = new EnumMap<EncodeHintType, Object>(EncodeHintType.class);
+            hintMap.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+			
+            // Now with zxing version 3.2.1 you could change border size (white border size to just 1)
+            hintMap.put(EncodeHintType.MARGIN, 1); /* default = 4 */
+			hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+ 
+			QRCodeWriter qrCodeWriter = new QRCodeWriter();
+			BitMatrix byteMatrix;
+            byteMatrix = qrCodeWriter.encode(pubKey, BarcodeFormat.QR_CODE, size,
+                    size, hintMap);
+			int CrunchifyWidth = byteMatrix.getWidth();
+			BufferedImage image = new BufferedImage(CrunchifyWidth, CrunchifyWidth,
+					BufferedImage.TYPE_INT_RGB);
+			image.createGraphics();
+ 
+			Graphics2D graphics = (Graphics2D) image.getGraphics();
+			graphics.setColor(Color.WHITE);
+			graphics.fillRect(0, 0, CrunchifyWidth, CrunchifyWidth);
+			graphics.setColor(Color.BLACK);
+ 
+			for (int i = 0; i < CrunchifyWidth; i++) {
+				for (int j = 0; j < CrunchifyWidth; j++) {
+					if (byteMatrix.get(i, j)) {
+						graphics.fillRect(i, j, 1, 1);
+					}
+				}
+			}
+			ImageIO.write(image, fileType, myFile);
+		} catch (WriterException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("\n\nYou have successfully created QR Code.");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner amountSpinner;
