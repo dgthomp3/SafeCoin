@@ -703,7 +703,7 @@ public class CDClientUI extends javax.swing.JFrame {
                 
                 //Print transaction ids
                 TransactionOutput transactionID = new TransactionOutput();
-
+                
 		//create genesis transaction, which sends 100 Coins to walletA: 
 		genesisTransaction = new Transaction(wallet.getPublicKey(), walletA.getPublicKey(), 100, null);
 		genesisTransaction.generateSignature(wallet.getPrivateKey());	 //manually sign the genesis transaction	
@@ -715,7 +715,7 @@ public class CDClientUI extends javax.swing.JFrame {
 		Block genesis = new Block("0");
 		genesis.addTransaction(genesisTransaction);
 		addBlock(genesis.getHash(),genesis);
-		
+		/*
 		//testing
 		Block block1 = new Block(genesis.getHash());
 		System.out.println("\nWalletA's balance is: " + walletA.getBalance());

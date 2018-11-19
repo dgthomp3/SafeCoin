@@ -40,6 +40,7 @@
 	  <groupId>com.placeholder</groupId>
 	  <artifactId>PlaceHolder</artifactId>
 	  <version>1.0</version>
+	  <type>jar</type>
 	 </dependency>
 	 <dependency>
 	  <groupId>com.dottorsoft</groupId>
@@ -56,6 +57,12 @@
 	  <groupId>com.google.zxing</groupId>
 	  <artifactId>core</artifactId>
 	  <version>3.2.1</version>
+	 </dependency>
+	 <dependency>
+	  <groupId>net.sf.jsr107cache</groupId>
+	  <artifactId>jsr107cache</artifactId>
+	  <version>1.0</version>
+	  <type>jar</type>
 	 </dependency>
 	</dependencies>
 	<build>
