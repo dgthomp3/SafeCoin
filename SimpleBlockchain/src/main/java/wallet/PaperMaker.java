@@ -32,7 +32,7 @@ public class PaperMaker {
         // BCECPrivateKey privKey = wallet.getPrivateKey();
         
         String filePath;
-        filePath = "/Users/tre33/Desktop/SafeCoin/SafeCoin/SimpleBlockchain/src/main/java/wallet/";
+        filePath = System.getProperty("user.dir");
         int size = 250;
         String fileType = "png";
         File myFile = new File(filePath + "PaperWallet");
