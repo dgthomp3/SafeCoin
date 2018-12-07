@@ -47,19 +47,8 @@ public class Main {
 		Block genesis = new Block("0");
 		genesis.addTransaction(genesisTransaction);
 		addBlock(genesis.getHash(),genesis);
-<<<<<<< HEAD
-		
+
                 /*
-		/*
->>>>>>> a7bea87c826c5c228113a53942db5857fb7d1bf1
-=======
-<<<<<<< HEAD
-		/*
-=======
-		
-                /*
->>>>>>> refs/remotes/origin/master
->>>>>>> 53547561e10b8e5c757124627e905f70ae5df4ba
 		//testing
 		Block block1 = new Block(genesis.getHash());
 		System.out.println("\nWalletA's balance is: " + walletA.getBalance());
