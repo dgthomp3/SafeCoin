@@ -1,17 +1,60 @@
+<!DOCTYPE HTML>
+
 <html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<h2>KEYS</h2>
-<p>Click on the buttons inside the tabbed menu:</p>
+	<head>
+		<title>Welcome to SafeCoin</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
 
-<div class="tab">
-  <form> <input type="button" value= "HOME" class="tablinks" onclick= "main.html" /></form>
-  <form> <input type="button" value= "WALLET" class="tablinks" onclick= "wallet.html" /></form> 
-  <form> <input type="button" value= "KEYS" class="tablinks" onclick= "KEYS.html"  /></form>
-</div>
-</head>
-<body>
+		<!-- Header -->
+			<header id="header">
+				<a class="logo" href="index.html">SafeCoin</a>
+				<nav>
+					<a href="#menu">Menu</a>
+				</nav>
+			</header>
 
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="keys.html">Keys</a></li>
+					<li><a href="wallet.html">My Wallet</a></li>
+				</ul>
+			</nav>
 
-</body>
+		<!-- Heading -->
+			<div id="heading" >
+				<h1>Keys</h1>
+			</div>
+
+		<!-- Main -->
+			<section id="main" class="wrapper">
+				<div class="inner">
+					<div class="content">
+					<div>  
+  						<input id="text" type="button" value="Show Public Key" onclick="showImage();"/>
+  						<a id="loadingImage" href="images/PublicKey" style="visibility:hidden">Click For Public Key</a>
+					</div>	
+					</div>
+				</div>
+			</section>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script type="text/javascript">
+				function showImage(){
+       				document.getElementById('loadingImage').style.visibility=    document.getElementById('loadingImage').style.visibility == 'visible'? 'hidden' : 'visible';
+   				}
+			</script>
+	</body>
 </html>

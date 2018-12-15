@@ -26,16 +26,18 @@ import javax.imageio.ImageIO;
  * @author team1
  */
 public class PaperMaker {
-    public void qrGenerator(Wallet wallet) {
+    public void publicKeyGen(Wallet wallet) {
         // Get Wallet Public Key
         String pubKey = wallet.getPublicKey();
-        // BCECPrivateKey privKey = wallet.getPrivateKey();
-        
-        String filePath;
-        filePath = System.getProperty("user.dir");
+           
+        String filePath, webPath;
+        filePath = System.getProperty("user.dir") + "/";
+        webPath = 
+                System.getProperty("user.dir") + "/src/main/java/wallet/html/images/";
         int size = 250;
         String fileType = "png";
-        File myFile = new File(filePath + "PaperWallet");
+        File PubKey = new File(filePath + "PublicKey");
+        File WebKey = new File(webPath + "PublicKey");
         
         try {
 			
@@ -46,14 +48,17 @@ public class PaperMaker {
             hintMap.put(EncodeHintType.MARGIN, 1); /* default = 4 */
 			hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
  
-			QRCodeWriter qrCodeWriter = new QRCodeWriter();
-			BitMatrix byteMatrix;
-            byteMatrix = qrCodeWriter.encode(pubKey, BarcodeFormat.QR_CODE, size,
-                    size, hintMap);
-			int width = byteMatrix.getWidth();
-			BufferedImage image = new BufferedImage(width, width,
-					BufferedImage.TYPE_INT_RGB);
-			image.createGraphics();
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            // Public Key
+            BitMatrix byteMatrix1;
+                        
+            byteMatrix1 = qrCodeWriter.encode(pubKey, BarcodeFormat.QR_CODE, size,
+                size, hintMap);
+            int width = byteMatrix1.getWidth();
+            
+            BufferedImage image = new BufferedImage(width, width,
+		BufferedImage.TYPE_INT_RGB);
+            image.createGraphics();
  
 			Graphics2D graphics = (Graphics2D) image.getGraphics();
 			graphics.setColor(Color.WHITE);
@@ -62,17 +67,80 @@ public class PaperMaker {
  
 			for (int i = 0; i < width; i++) {
 				for (int j = 0; j < width; j++) {
-					if (byteMatrix.get(i, j)) {
+					if (byteMatrix1.get(i, j)) {
 						graphics.fillRect(i, j, 1, 1);
 					}
 				}
 			}
-			ImageIO.write(image, fileType, myFile);
+                        
+			ImageIO.write(image, fileType, PubKey);
+                        ImageIO.write(image, fileType, WebKey);
 		} catch (WriterException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("\n\nYou have successfully created QR Code.");
+        
+        
+		System.out.println("\n\nYou have successfully your paper wallet");
     }
+    
+    
+    /*
+    public void privateKeyGen(Wallet wallet){
+        String priKey = wallet.getPriKey();
+        String filePath;
+        filePath = System.getProperty("user.dir");
+        int size = 250;
+        String fileType = "png";
+        File PriKey = new File(filePath + "Private Key");
+        
+        try {
+			
+            Map<EncodeHintType, Object> hintMap = new EnumMap<EncodeHintType, Object>(EncodeHintType.class);
+            hintMap.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+			
+            // Now with zxing version 3.2.1 you could change border size (white border size to just 1)
+            hintMap.put(EncodeHintType.MARGIN, 1); default = 4 
+			hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+ 
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            // Private Key
+            BitMatrix byteMatrix;
+                        
+            byteMatrix = qrCodeWriter.encode(priKey, BarcodeFormat.QR_CODE, size,
+                size, hintMap);
+            int width = byteMatrix.getWidth();
+            
+            BufferedImage image = new BufferedImage(width, width,
+		BufferedImage.TYPE_INT_RGB);
+            image.createGraphics();
+ 
+		Graphics2D graphics = (Graphics2D) image.getGraphics();
+		graphics.setColor(Color.WHITE);
+		graphics.fillRect(0, 0, width, width);
+		graphics.setColor(Color.BLACK);
+ 
+		Graphics2D graphics1 = (Graphics2D) image.getGraphics();
+			graphics.setColor(Color.WHITE);
+			graphics.fillRect(0, 0, width, width);
+			graphics.setColor(Color.BLACK);
+                        
+                        for (int i = 0; i < width; i++) {
+				for (int j = 0; j < width; j++) {
+					if (byteMatrix.get(i, j)) {
+						graphics1.fillRect(i, j, 1, 1);
+					}
+				}
+			}
+                        
+                        ImageIO.write(image, fileType, PriKey);
+		} catch (WriterException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+                System.out.println("\n\nYou have successfully created PKey QR Code.");
+    }
+    */
 }

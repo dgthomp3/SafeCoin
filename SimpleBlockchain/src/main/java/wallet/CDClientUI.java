@@ -698,8 +698,8 @@ public class CDClientUI extends javax.swing.JFrame {
 		Wallet wallet = new Wallet();
                 PaperMaker papM = new PaperMaker();
                 
-                papM.qrGenerator(walletA);
-                // papM.qrGenerator(walletB);
+                papM.publicKeyGen(walletA);
+                papM.publicKeyGen(walletB);
                 
                 //Print transaction ids
                 TransactionOutput transactionID = new TransactionOutput();

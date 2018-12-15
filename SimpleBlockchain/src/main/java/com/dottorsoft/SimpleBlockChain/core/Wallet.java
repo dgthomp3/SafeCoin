@@ -22,7 +22,7 @@ public final class Wallet {
 	
 	private BCECPrivateKey privateKey;
 	private String publicKey;
-	
+        
 	public HashMap<String,TransactionOutput> UTXOs = new HashMap<String,TransactionOutput>();
 	
 	public Wallet() {
@@ -44,7 +44,7 @@ public final class Wallet {
                         
                 // Set the public and private keys from the keyPair
                 setPrivateKey((BCECPrivateKey) keyPair.getPrivate());
-                setPublicKey(StringUtil.getStringFromKey(keyPair.getPublic()));
+                setPublicKey(StringUtil.getStringFromKey(keyPair.getPublic()));             
             } catch(InvalidAlgorithmParameterException e) {
 		throw new RuntimeException(e);
             } catch (NoSuchAlgorithmException e) {
@@ -72,16 +72,16 @@ public final class Wallet {
 	}
 	
 	public Transaction sendFunds(String _recipient,float value ) throws NoSuchAlgorithmException, InvalidKeySpecException {
+            float total = 0;
 		if(getBalance() < value) {
 			System.out.println("#Not Enough funds to send transaction. Transaction Discarded.");
 			return null;
 		}
 		ArrayList<TransactionInput> inputs = new ArrayList<TransactionInput>();
 		
-		float total = 0;
 		TransactionOutput UTXO;
 		for (Map.Entry<String, TransactionOutput> item: UTXOs.entrySet()){
-			UTXO= item.getValue();
+			UTXO = item.getValue();
 			total += UTXO.value;
 			inputs.add(new TransactionInput(UTXO.id));
 			if(total > value) break;
@@ -100,7 +100,7 @@ public final class Wallet {
 	public BCECPrivateKey getPrivateKey() {
 		return privateKey;
 	}
-
+        
 	public void setPrivateKey(BCECPrivateKey privateKey) {
 		this.privateKey = privateKey;
 	}
